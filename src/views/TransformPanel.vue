@@ -8,7 +8,7 @@
                 <p>{{rotateInput}}</p>    
             </div>
             <div class="input rotate-input">
-                <input @input="skuska()" type="range" min="0" max="100" v-model="rotateInput">
+                <input type="range" min="0" max="360" v-model="rotateInput">
             </div>
         </div>
         <div class="prop rotate__Y">
@@ -17,7 +17,7 @@
                 <p>{{rotateInputY}}</p>   
             </div>
             <div class="input rotate__Y-input">
-                <input type="range" min="0" max="100" v-model="rotateInputY">
+                <input type="range" min="0" max="360" v-model="rotateInputY">
             </div>
         </div>
         <div class="prop rotate__X">
@@ -26,7 +26,7 @@
                 <p>{{rotateInputX}}</p>    
             </div>
             <div class="input rotate__X-input">
-                <input type="range" min="0" max="100" v-model="rotateInputX">
+                <input type="range" min="0" max="360" v-model="rotateInputX">
             </div>
         </div>
         <div class="prop rotate__Z">
@@ -35,7 +35,7 @@
                 <p>{{rotateInputZ}}</p>  
             </div>
             <div class="input rotate__Z-input">
-                <input type="range" min="0" max="100" v-model="rotateInputZ">
+                <input type="range" min="0" max="360" v-model="rotateInputZ">
             </div>
         </div>
     </div>
@@ -126,11 +126,33 @@
                 perspective : 0,
             }
         },
-        methods: {
-            skuska() {
-                this.$root.$emit('rot',this.rotateInput);
+        updated () {
+            this.$root.$emit('transforms',this.transformStyle)
+        },
+
+
+        computed: {
+            transformStyle() {
+                let transformArray = []
+                if(this.rotateInput>0){
+                    transformArray.push(`rotate(${this.rotateInput}deg)`)
+                }
+                if(this.rotateInputY>0){
+                    transformArray.push(`rotateY(${this.rotateInputY}deg)`)
+                }
+                if(this.rotateInputX>0){
+                    transformArray.push(`rotateX(${this.rotateInputX}deg)`)
+                }
+                if(this.rotateInputZ>0){
+                    transformArray.push(`rotateZ(${this.rotateInputZ}deg)`)
+                }
+                return { 
+                    transform: transformArray.join(' ') 
+                
+                }
             }
         },
+
     }
 </script>
 

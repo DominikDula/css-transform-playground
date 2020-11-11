@@ -11,19 +11,16 @@
             </nav>
 
             <div class="transform-container">
-                <div class="transform-element"></div>
+                <div v-bind:style="transformObj" class="transform-element"></div>
             </div>
             
             <div class="css-output">
                 <pre>
                     element {
-                        transform : rotate(65deg)
-                        scale(1.2)
-                        skew(-35deg) 
-                        translate(-74px);
+                        transform : 
+                        {{transformObj.transform}}
                 }
                 </pre>
-                <p>{{key}}</p>
             </div>
 
         </main>
@@ -35,16 +32,19 @@
 export default {
     data() {
         return {
-            key: ''
+            transformObj: '',
+            
         }
     },
 
     mounted () {
-        this.$root.$on('rot',data => {
-            this.key = data
+        this.$root.$on('transforms',data => {
+            this.transformObj = data
             
         });
     },
+
+
 }
 </script>
 
