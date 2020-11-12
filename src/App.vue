@@ -15,12 +15,12 @@
             </div>
             
             <div class="css-output">
-                <pre>
+                <p>
                     element {
                         transform : 
                         {{transformObj.transform}}
                 }
-                </pre>
+                </p>
             </div>
 
         </main>

@@ -91,6 +91,7 @@ body{
     width: 35rem;
     height: 35rem;
     background: $big-box-bg;
+    overflow: hidden;
 
     .transform-element{
         position: relative;

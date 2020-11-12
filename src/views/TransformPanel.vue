@@ -46,7 +46,7 @@
                 <p>{{skewY}}</p>    
             </div>
             <div class="input skew__Y-input">
-                <input type="range" min="0" max="100" v-model="skewY">
+                <input type="range" min="-150" max="150" v-model="skewY">
             </div>
         </div>
         <div class="prop skew__X">
@@ -55,7 +55,7 @@
                 <p>{{skewX}}</p>    
             </div>
             <div class="input skew__X-input">
-                <input type="range" min="0" max="100" v-model="skewX">
+                <input type="range" min="-150" max="150" v-model="skewX">
             </div>
         </div>
         <div class="prop scale">
@@ -64,36 +64,27 @@
                 <p>{{scale}}</p>    
             </div>
             <div class="input scale-input">
-                <input type="range" min="0" max="100" v-model="scale">
+                <input type="range" min="-2" max="2" step="0.01" v-model="scale">
             </div>
         </div>
     </div>
     <div class="col col-3">
-        <div class="prop transform">
-            <div class=" prop-desc transform-desc">
-                <h3>Transform</h3>
-                <p>{{transform}}</p>    
+        <div class="prop translate__Y">
+            <div class=" prop-desc translate__Y-desc">
+                <h3>Transtale-Y</h3>
+                <p>{{translateY}}</p>    
             </div>
-            <div class="input transform-input">
-                <input type="range" min="0" max="100" v-model="transform">
-            </div>
-        </div>
-        <div class="prop transform__Y">
-            <div class=" prop-desc transform__Y-desc">
-                <h3>Transform-Y</h3>
-                <p>{{transformY}}</p>    
-            </div>
-            <div class="input transform__Y-input">
-                <input type="range" min="0" max="100" v-model="transformY">
+            <div class="input translate__Y-input">
+                <input type="range" min="-100" max="100" v-model="translateY">
             </div>
         </div>
-        <div class="prop transform__X">
-            <div class=" prop-desc transform__X-desc">
-                <h3>Transform-X</h3>
-                <p>{{transformX}}</p>    
+        <div class="prop translate__X">
+            <div class=" prop-desc translate__X-desc">
+                <h3>Transtale-X</h3>
+                <p>{{translateX}}</p>    
             </div>
-            <div class="input transform__X-input">
-                <input type="range" min="0" max="100" v-model="transformX">
+            <div class="input translate__X-input">
+                <input type="range" min="-100" max="100" v-model="translateX">
             </div>
         </div>
         <div class="prop perspective">
@@ -102,7 +93,7 @@
                 <p>{{perspective}}</p>    
             </div>
             <div class="input perspective-input">
-                <input type="range" min="0" max="100" v-model="perspective">
+                <input type="range" min="100" max="2000" v-model="perspective">
             </div>
         </div>
     </div>
@@ -119,11 +110,10 @@
                 rotateInputZ : 0,
                 skewY : 0,
                 skewX : 0,
-                scale : 0,
-                transform : 0,
-                transformY : 0,
-                transformX : 0,
-                perspective : 0,
+                scale : 1,
+                translateY : 0,
+                translateX : 0,
+                perspective : 700,
             }
         },
         updated () {
@@ -134,6 +124,8 @@
         computed: {
             transformStyle() {
                 let transformArray = []
+
+                transformArray.push(`perspective(${this.perspective}px)`)
                 if(this.rotateInput>0){
                     transformArray.push(`rotate(${this.rotateInput}deg)`)
                 }
@@ -146,11 +138,28 @@
                 if(this.rotateInputZ>0){
                     transformArray.push(`rotateZ(${this.rotateInputZ}deg)`)
                 }
+                if(this.skewY != 0){
+                    transformArray.push(`skewY(${this.skewY}deg)`)
+                }
+                if(this.skewX != 0){
+                    transformArray.push(`skewX(${this.skewX}deg)`)
+                }
+                if(this.scale != 1){
+                    transformArray.push(`scale(${this.scale})`)
+                }
+                if(this.transformY != 0){
+                    transformArray.push(`translateY(${this.translateY}px)`)
+                }
+                if(this.transformX != 0){
+                    transformArray.push(`translateX(${this.translateX}px)`)
+                }
                 return { 
                     transform: transformArray.join(' ') 
                 
                 }
             }
+
+                
         },
 
     }
