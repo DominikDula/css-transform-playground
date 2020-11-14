@@ -93,7 +93,7 @@
                 <p>{{perspective}}</p>    
             </div>
             <div class="input perspective-input">
-                <input type="range" min="100" max="2000" v-model="perspective">
+                <input type="range" min="10" max="1000" v-model="perspective">
             </div>
         </div>
     </div>
@@ -147,10 +147,10 @@
                 if(this.scale != 1){
                     transformArray.push(`scale(${this.scale})`)
                 }
-                if(this.transformY != 0){
+                if(this.translateY != 0){
                     transformArray.push(`translateY(${this.translateY}px)`)
                 }
-                if(this.transformX != 0){
+                if(this.translateX != 0){
                     transformArray.push(`translateX(${this.translateX}px)`)
                 }
                 return { 
@@ -177,7 +177,7 @@
 }
 
 .col{
-    
+    padding: 0 0 1em;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -226,6 +226,17 @@ input[type=range]::-webkit-slider-thumb{
     border-radius: 50%;
     background: $slider-thumb-color;
 
+}
+
+@media (max-width:1280px){
+    .prop{
+    width: 80%; 
+    }
+}
+@media (max-width:900px){
+    .sidebar{
+        display: block;
+    }
 }
 
 </style>
